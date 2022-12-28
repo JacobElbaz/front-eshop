@@ -9,19 +9,19 @@ import { getUser } from './actions/user.action';
 function App() {
     const [uid, setUid] = useState(null);
     const dispatch = useDispatch();
+    const fetchToken = () => {
+        return async () => {
+            try {
+                const res = await axios.get(
+                    `${process.env.REACT_APP_API_URL}jwtid`
+                );
+                setUid(res.data);
+            } catch(err) {
+                console.log(err);
+            }
+        }};
 
     useEffect(() => {
-        const fetchToken = () => {
-            return async () => {
-                try {
-                    const res = await axios.get(
-                        `${process.env.REACT_APP_API_URL}jwtid`
-                    );
-                    setUid(res.data);
-                } catch(err) {
-                    console.log(err);
-                }
-            }};
         fetchToken();
         if (uid) dispatch(getUser(uid))
     }, [uid, dispatch]);
