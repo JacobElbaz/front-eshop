@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { getUser } from './actions/user.action';
 
 function App() {
-    const [uid, setUid] = useState(null);
+    const [uid, setUid] = useState('6363b389f87b72140fb22f93');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -24,6 +24,7 @@ function App() {
         };
         fetchToken();
         if (uid) dispatch(getUser(uid))
+        console.log(uid)
     }, [uid, dispatch]);
     return (
         <UidContext.Provider value = {uid}>
