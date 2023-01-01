@@ -129,7 +129,7 @@ export const updateProduct = (id, product) => {
             url : `${process.env.REACT_APP_API_URL}api/product/${id}`,
             data: product,
         })
-        .then((res) => {
+        .then(() => {
             dispatch({type: UPDATE_PRODUCT, payload: product});
         })
         .catch((err)=>{
@@ -145,7 +145,7 @@ export const updateRateProduct = (productId, rate) => {
             url: `${process.env.REACT_APP_API_URL}api/product/rate`,
             data: {productId, rate},
         })
-        .then((res) => {
+        .then(() => {
             dispatch({type: UPDATE_RATE, payload: {productId, rate}});
         })
         .catch((err)=>{

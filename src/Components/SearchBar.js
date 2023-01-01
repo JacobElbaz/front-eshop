@@ -1,7 +1,7 @@
 import React from 'react'
 import './SearchBar.css'
 
-export default function SearchBar({ placeholder, data }) {
+export default function SearchBar({ placeholder }) {
     return (
         <div className='search'>
             <div className='searchInputs'>

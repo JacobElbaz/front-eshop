@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
-
 import FormContainer from '../Components/FormContainer';
 import CheckoutSteps from '../Components/CheckoutSteps';
 import Input from '../Components/Input';

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Button } from 'react-bootstrap';
-
+import { Row, Col } from 'react-bootstrap';
 import { getProduct } from '../actions/products.action';
-
 import ProductDetails from '../Components/ProductDetails';
 import ProductAvailability from '../Components/ProductAvailability';
 import { useParams } from 'react-router-dom';

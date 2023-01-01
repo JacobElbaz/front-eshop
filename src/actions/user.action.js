@@ -25,7 +25,7 @@ export const getUser = (uid) => {
   };
 };
 
-export const updateWishProduct = (productId, userId) => async (dispatch, getState) => {
+export const updateWishProduct = (productId, userId) => async (dispatch) => {
 
   try {
     const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/wishlist/` + userId, { productId });
@@ -37,7 +37,7 @@ export const updateWishProduct = (productId, userId) => async (dispatch, getStat
     console.log(error);
   }
 };
-export const addWishProduct = (productId, userId) => async (dispatch, getState) => {
+export const addWishProduct = (productId, userId) => async (dispatch) => {
 
   try {
     const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/addwishlist/` + userId, { productId });
@@ -49,7 +49,7 @@ export const addWishProduct = (productId, userId) => async (dispatch, getState) 
     console.log(error);
   }
 };
-export const removeWishProduct = (productId, userId) => async (dispatch, getState) => {
+export const removeWishProduct = (productId, userId) => async (dispatch) => {
 
   try {
     const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/removewishlist/` + userId, { productId });
@@ -84,7 +84,7 @@ export const forgot_password = (email, password) => {
       url: `${process.env.REACT_APP_API_URL}api/client/forgotpassword`,
       data: { email, password },
     })
-    .then((res) => {
+    .then(() => {
       dispatch({ type: FORGOT_PASSWORD, payload: password });
     })
     .catch((err) => console.log(err));
@@ -112,7 +112,7 @@ export const deleteUser = (userId) => {
       method: "delete",
       url: `${process.env.REACT_APP_API_URL}api/client/${userId}`,
     })
-      .then((res) => {
+      .then(() => {
         dispatch({ type: DELETE_USER, payload: { userId } });
       })
       .catch((err) => console.log(err));
@@ -143,7 +143,7 @@ export const update_password = (email, password) => {
       url: `${process.env.REACT_APP_API_URL}api/client/password`,
       data: { email, password },
     })
-    .then((res) => {
+    .then(() => {
       dispatch({ type: UPDATE_PASSWORD, payload: password });
     })
     .catch((err) => console.log(err));
@@ -157,7 +157,7 @@ export const update_username = (email, username) => {
       url: `${process.env.REACT_APP_API_URL}api/client/username`,
       data: { email, username },
     })
-    .then((res) => {
+    .then(() => {
       console.log(email);
       dispatch({ type: UPDATE_USERNAME, payload: username });
     })

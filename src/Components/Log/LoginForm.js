@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Row, Col, Form, Modal } from 'react-bootstrap';
+import { Row, Col, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgot_password } from '../../actions/user.action';
 import { Link } from 'react-router-dom';

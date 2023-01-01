@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, ListGroup, Button } from 'react-bootstrap';
+import { Row, Col, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getOrders } from '../actions/orders.action';

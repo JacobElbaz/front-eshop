@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
-
 import FormContainer from '../Components/FormContainer';
 import CheckoutSteps from '../Components/CheckoutSteps';
 import Calendar from 'react-calendar';
@@ -28,15 +27,6 @@ const Delivery = () => {
         localStorage.setItem('deliveryDate', JSON.stringify(date));
         window.location = '/payment';
     };
-
-    const disabledDates = ({date, view}) => {
-        if(!isEmpty(dates[0])){
-            console.log(new Date(dates.dates[0]).toDateString());
-            console.log(date.toDateString());
-            const dd = dates.dates.filter(date_ => new Date(date_).toDateString() == date.getTime);
-            return view === 'month' && dd.length != 0;
-        }
-    }
 
     return ( 
         <div className='home'>

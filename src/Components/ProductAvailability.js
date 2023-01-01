@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Row,
   Col,
@@ -8,10 +8,9 @@ import {
   Button,
   Modal,
 } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { addWishProduct, getUser, removeWishProduct, updateWishProduct } from '../actions/user.action';
+import { useDispatch } from 'react-redux';
+import { addWishProduct, removeWishProduct } from '../actions/user.action';
 import { Link } from 'react-router-dom';
-import { UidContext } from '../Components/AppContext';
 
 const ProductAvailability = ({ product }) => {
   const [showModalCart, setShowModalCart] = useState(false);
@@ -66,11 +65,6 @@ const ProductAvailability = ({ product }) => {
   const handleClose = () => {
     setShowModalCart(false);
   };
-
-  const renderWishlistText =
-    user && user.wishlist?.find((wish) => wish[0] === product._id)
-      ? d = 'Remove From Wishlist'
-      : d ='Add To Wishlist';
 
   return (
     <>

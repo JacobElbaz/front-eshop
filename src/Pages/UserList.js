@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Button, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Table, Col, Row } from 'react-bootstrap';
 import { getAllUsers } from '../actions/user.action';
 import { isEmpty } from '../Components/Utils';
 
@@ -15,8 +14,6 @@ const UserList = () => {
       setLoadUsers(false);
     }
   }, [loadUsers, dispatch]);
-
-  const onDeleteClick = (id) => {};
 
   return (
     <div className="m-5">
@@ -57,20 +54,6 @@ const UserList = () => {
                       <i className="fas fa-times" style={{ color: 'red' }}></i>
                     )}
                   </td>
-                  {/* <td>
-                    <Link to={`/admin/products/${user._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </Link>
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => onDeleteClick(user._id)}
-                    >
-                      <i className="fas fa-trash"></i>
-                    </Button>
-                  </td> */}
                 </tr>
               );
             })}

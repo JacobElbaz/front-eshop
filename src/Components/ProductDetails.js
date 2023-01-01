@@ -3,11 +3,7 @@ import { Button, Form, ListGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getOrders } from '../actions/orders.action';
-import {
-  getProduct,
-  getProducts,
-  updateRateProduct,
-} from '../actions/products.action';
+import { updateRateProduct } from '../actions/products.action';
 
 import Rating from '../Components/Rating';
 import { isEmpty } from './Utils';

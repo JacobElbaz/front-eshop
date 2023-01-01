@@ -25,7 +25,7 @@ export const updateSales = (cart) => {
       url: `${process.env.REACT_APP_API_URL}api/order/updatesales`,
       data: { cart },
     })
-      .then((res) => {
+      .then(() => {
         dispatch({ type: UPDATE_SALES, payload: cart });
       })
       .catch((err) => console.log(err + ' rdstg ' + cart));
@@ -39,7 +39,7 @@ export const updateStatus = (orderId, status) => {
       url: `${process.env.REACT_APP_API_URL}api/order/` + orderId,
       data: { status },
     })
-      .then((res) => {
+      .then(() => {
         dispatch({ type: UPDATE_STATUS, payload: status });
       })
       .catch((err) => console.log(err));

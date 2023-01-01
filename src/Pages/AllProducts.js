@@ -12,37 +12,15 @@ import { useParams } from 'react-router-dom';
 
 export default function AllProducts() {
 
-  const [loadProducts, setLoadProducts] = useState(true);
   const category = String(useParams().category);
   const [filter, setFilter] = useState({ category: category === 'all' ? '' : category, genre: '' });
   const [sort, setSort] = useState('');
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProductsReducer);
   
-  const onSort = (option) => {
-    console.log('onSort');
-    switch(option) {
-      case 'az': products.sort();
-      break;
-      case 'za': products.sort().reverse();
-      break;
-      case 'low-high': products.sort((a, b) => a.price - b.price);
-      break;
-      case 'high-low': products.sort((a, b) => a.price - b.price).reverse();
-      break;
-      case 'best-sales': products.sort();
-      break;
-      case 'newest': products.sort();
-      break;
-      default: 
-      break;
-    }
-    setLoadProducts(!loadProducts);
-  }
-  
   useEffect(() => {
     dispatch(getProducts(undefined, filter.category, filter.genre, sort));
-  }, [sort, filter, loadProducts, dispatch]);
+  }, [sort, filter, dispatch]);
 
 
 

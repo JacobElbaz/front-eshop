@@ -3,7 +3,7 @@ import axios from 'axios';
 export const ADD_DATE = 'ADD_DATE';
 export const GET_DATES = 'GET_DATES';
 
-export const addDate = (newDate) => async (dispatch, getState) => {
+export const addDate = (newDate) => async (dispatch) => {
 
     
     try {

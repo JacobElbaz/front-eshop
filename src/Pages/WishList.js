@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Button, Modal } from 'react-bootstrap';
 import Product from '../Components/Product';
 import { HeartFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import { getUser, removeWishProduct, updateWishProduct } from '../actions/user.action';
-import { UidContext } from '../Components/AppContext';
+import { removeWishProduct } from '../actions/user.action';
 import { getProducts } from '../actions/products.action';
-//import { deleteWishProduct } from '../actions/auth';
 
 const WishList = () => {
   const [showModalCart, setShowModalCart] = useState(false);
@@ -16,7 +14,7 @@ const WishList = () => {
   const products = useSelector((state) => state.allProductsReducer);
   const wishlist = user?.wishlist;
   const dispatch = useDispatch();
-  const [qty, setQty] = useState(1);
+  const qty = 1;
   let [cart, setCart] = useState([]);
   let localCart = localStorage.getItem('cart');
 

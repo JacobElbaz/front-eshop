@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { UidContext } from '../Components/AppContext';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { Button, Modal } from 'react-bootstrap';
@@ -24,8 +23,6 @@ function EditProduct() {
     useEffect(() => {
         dispatch(getProduct(product_id));
     },[dispatch]);
-
-  const uid = useContext(UidContext);
   
   const categoryOptions = [
     { title: 'PS4', value: 'PS4' },

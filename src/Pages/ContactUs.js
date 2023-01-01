@@ -2,8 +2,6 @@ import React from 'react';
 import { FaGithub, FaLinkedinIn } from "react-icons/fa"
 import img1 from '../images/Elie.jpeg';
 import img2 from '../images/Jacob.jpeg';
-import img3 from '../images/Sam.jpeg';
-import img4 from '../images/Adane.jpeg';
 import './ContactUs.css'
 
 function ContactUs() {

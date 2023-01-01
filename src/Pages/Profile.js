@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { update_username, forgot_password, getUser, deleteUser, updateProfile } from '../actions/user.action';
+import { getUser, deleteUser, updateProfile } from '../actions/user.action';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import cookie from "js-cookie";
@@ -50,7 +50,6 @@ const Profile = () => {
     }
   };
 
-
   const onSubmitUsername = (e) => {
     
     e.preventDefault();
@@ -62,16 +61,6 @@ const Profile = () => {
     }
     //dispatch(update_username(initialValues.email, username));
     //setShowModalUsername(true);
-  };
-
-  const onSubmitPassword = (e) => {
-    e.preventDefault();
-    if (errors === '' && passwordErrors === '') {
-      dispatch(forgot_password(initialValues.email, password));
-      setShowModalPassword(true);
-    } else {
-      setShowModalError(true);
-    }
   };
 
   const handleClose = () => {

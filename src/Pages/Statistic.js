@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Col, Row, Table } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { isEmpty } from '../Components/Utils';
 import { allProducts, getProducts } from '../actions/products.action';

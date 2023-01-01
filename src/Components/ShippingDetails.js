@@ -1,10 +1,7 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import history from '../history';
-
 const ShippingDetails = ({ order }) => {
-  const urlParams = history.location.pathname.split('/')[1];
 
   return (
     <ListGroup.Item>
