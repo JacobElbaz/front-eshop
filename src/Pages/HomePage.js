@@ -55,7 +55,6 @@ function HomePage() {
                                 <Link to = '/contact'>Contact</Link>
                                 <ul>
                                     <li>Jacob Elbaz</li>
-                                    <li>Elie Bracha</li>
                                 </ul>
                             </div>
                             <div className="col-md-6 item text">
