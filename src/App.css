@@ -78,4 +78,15 @@
     font-size:13px;
     margin-bottom:0;
   }
+
+  @media (max-width: 768px) {
+    .brand-logo {
+      width: 100%;
+    }
+  }
   
+  @media (min-width: 769px) {
+    .brand-logo {
+      width: 70%;
+    }
+  }

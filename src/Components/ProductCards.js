@@ -5,10 +5,10 @@ import Product from "./Product";
 const ProductCards = ({ products }) => {
   return (
     <>
-      <Row>
+      <Row xs={3} sm={3} md={3} lg={6} xl={6}  className="g-2">
         {Object.values(products).length > 0 ? (
           Object.values(products).map((product) => (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+            <Col key={product._id}>
               <Product product={product} />
             </Col>
           ))

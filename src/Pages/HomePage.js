@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBestSeller, getDeals, getLatest, getTrend} from '../actions/products.action';
 import ProductCards from '../Components/ProductCards';
+import { Row } from 'react-bootstrap';
 
 function HomePage() {
 
@@ -21,16 +22,16 @@ function HomePage() {
 
     return (
         <div>
-            <div className="home">
-                <div className="text-center"><img src={img} alt="" className="w-50 mt-2"/></div>
+            <div className="home" style={{backgroundColor: 'black', color: 'white'}}>
+                <div className="text-center"><img src={img} alt="" className="brand-logo"/></div>
                 
-                <div className="mt-5 mb-2 ">
-                    <Link to='/allProducts/PS4' className="btn btn-secondary btn-lg mx-auto w-25">PS4</Link>
-                    <Link to='/allProducts/PS5' className="btn btn-secondary btn-lg mx-auto w-25">PS5</Link>
-                    <Link to='/allProducts/XBOX' className="btn btn-secondary btn-lg mx-auto w-25">XBOX</Link>
-                    <Link to='/allProducts/SWITCH' className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</Link>
-                </div>
-                <Link to='/allProducts/all' className="btn btn-success btn-lg mx-auto mb-5 w-100">ALL GAMES</Link>
+                <Row className="mt-5 mb-2">
+                    <Link to='/allProducts/PS4' className="btn btn-secondary mx-auto w-25">PS4</Link>
+                    <Link to='/allProducts/PS5' className="btn btn-secondary  mx-auto w-25">PS5</Link>
+                    <Link to='/allProducts/XBOX' className="btn btn-secondary mx-auto w-25">XBOX</Link>
+                    <Link to='/allProducts/SWITCH' className="btn btn-secondary mx-auto w-25">SWITCH</Link>
+                </Row>
+                <Link to='/allProducts/all' className="btn btn-success mx-auto mb-5 w-100">ALL GAMES</Link>
                 <h1>Trending</h1>
                 <ProductCards products={trending}></ProductCards>
                 <br />
