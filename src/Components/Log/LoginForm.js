@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { forgot_password } from '../../actions/user.action';
-import { Link } from 'react-router-dom';
+import { forgot_password, getUser } from '../../actions/user.action';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllUsers } from '../../actions/user.action';
 import axios from 'axios';
 import './LoginForm.css';
@@ -17,6 +17,7 @@ function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [emailError, setEmailError] = useState('');
   let d = 'wrong email';
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (loadUsers) {
@@ -34,14 +35,16 @@ function LoginForm() {
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}api/client/login`,
       data: details,
+      withCredentials: true
     })
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          window.location = '/';
+          dispatch(getUser(res.data.client))
+          navigate('/');
         }
       })
 

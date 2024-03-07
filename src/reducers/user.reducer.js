@@ -8,12 +8,16 @@ import {
   ADD_WISH_PRODUCT,
   REMOVE_WISH_PRODUCT,
   DELETE_USER,
+  GET_CURRENT_USER,
 } from '../actions/user.action';
 
 const initialState = {};
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
+    case GET_CURRENT_USER:
+      return action.payload;
+      
     case GET_USER:
       return action.payload;
 

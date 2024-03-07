@@ -12,9 +12,31 @@ export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const UPDATE_USERNAME = "UPDATE_USERNAME";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 export const DELETE_USER = "DELETE_USER";
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
+
+export const getCurrentUser = () => {
+  return async (dispatch) => {
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    if (!auth) {
+      console.log('user not found');
+      return
+    } // cookie not found
+    const userId = auth._id;
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}api/client/${userId}`);
+      dispatch({ type: GET_CURRENT_USER, payload: res.data });
+    } catch (err) {
+      return console.log(err);
+    }
+  }
+}
 
 export const getUser = (uid) => {
   return async (dispatch) => {
+    if (!uid) {
+      console.log('no uid');
+      return
+    } 
     try {
       const res = await axios
         .get(`${process.env.REACT_APP_API_URL}api/client/${uid}`);
