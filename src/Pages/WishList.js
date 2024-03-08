@@ -10,7 +10,7 @@ import { getProducts } from '../actions/products.action';
 const WishList = () => {
   const [showModalCart, setShowModalCart] = useState(false);
   const [loadProducts, setLoadProducts] = useState();
-  const user = JSON.parse(localStorage.getItem('auth'));
+  const user = useSelector((state) => state.userReducer);
   const products = useSelector((state) => state.allProductsReducer);
   const wishlist = user?.wishlist;
   const dispatch = useDispatch();
