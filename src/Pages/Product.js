@@ -13,13 +13,24 @@ const Product = () => {
   const productId = String(useParams().id);
 
   useEffect(() => {
-    dispatch(getProduct(productId));
-    setIsLoading(false);
-  }, []);
+    const fetchData = async () => {
+      try {
+        await dispatch(getProduct(productId));
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching product:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, productId]);
 
   return (
     <div className="m-5">
       {isLoading ? (
+        // Consider using a loading spinner here
         "Loading..."
       ) : (
         <Row>
