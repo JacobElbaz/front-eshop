@@ -8,15 +8,16 @@ import {
   Button,
   Modal,
 } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addWishProduct, removeWishProduct } from '../actions/user.action';
 import { Link } from 'react-router-dom';
+import { isEmpty } from './Utils';
 
 const ProductAvailability = ({ product }) => {
   const [showModalCart, setShowModalCart] = useState(false);
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem('auth'));
+  const user = useSelector((state) => state.userReducer);
   let [cart, setCart] = useState([]);
   let localCart = localStorage.getItem('cart');
   let d = '';
@@ -27,7 +28,7 @@ const ProductAvailability = ({ product }) => {
   }, []); //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
-    if (user) {
+    if (!isEmpty(user)) {
       let cartCopy = [...cart];
       let existingItem = cartCopy.find(
         (cartItem) => cartItem._id == product._id
@@ -47,14 +48,12 @@ const ProductAvailability = ({ product }) => {
   };
 
   const onAddToWishListClick = () => {
-    if (user) {
+    if (!isEmpty(user)) {
       if(d==='Remove From Wishlist'){
         dispatch(removeWishProduct(product._id, user._id));
-        window.location.reload();
       }
       else{
         dispatch(addWishProduct(product._id, user._id));
-        window.location.reload();
       }
       
     } else {
@@ -148,7 +147,7 @@ const ProductAvailability = ({ product }) => {
                 type="button"
                 onClick={onAddToWishListClick}
               >
-                {user && user.wishlist.find((wish) => wish === product._id)
+                {!isEmpty(user) && user.wishlist.find((wish) => wish === product._id)
                   ? d = 'Remove From Wishlist'
                   : d = 'Add To Wishlist'}
               </Button>
