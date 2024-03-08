@@ -53,8 +53,10 @@ const ProductAvailability = ({ product }) => {
   const onAddToWishListClick = () => {
     if (!isEmpty(user)) {
       if (inWishlist) {
+        setInWishlist(false);
         dispatch(removeWishProduct(product._id, user._id));
       } else {
+        setInWishlist(true);
         dispatch(addWishProduct(product._id, user._id));
       }
     } else {
