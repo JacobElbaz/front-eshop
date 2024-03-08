@@ -5,13 +5,11 @@ import Product from '../Components/Product';
 import { HeartFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import { removeWishProduct } from '../actions/user.action';
-import { getProducts } from '../actions/products.action';
 
 const WishList = () => {
   const [showModalCart, setShowModalCart] = useState(false);
   const [loadProducts, setLoadProducts] = useState();
   const user = useSelector((state) => state.userReducer);
-  const products = useSelector((state) => state.allProductsReducer);
   const wishlist = user?.wishlist;
   const dispatch = useDispatch();
   const qty = 1;
@@ -21,17 +19,13 @@ const WishList = () => {
   useEffect(() => {
     localCart = JSON.parse(localCart);
     if (localCart) setCart(localCart);
-    if (loadProducts) {
-      dispatch(getProducts());
-      setLoadProducts(false);
-    }
   }, [loadProducts, dispatch]);
 
   const onAddToCartClick = (product) => {
     if (user) {
       let cartCopy = [...cart];
       let existingItem = cartCopy.find(
-        (cartItem) => cartItem._id == product._id
+        (cartItem) => cartItem._id === product._id
       );
       if (existingItem) {
       } else {
@@ -106,8 +100,7 @@ const WishList = () => {
           {wishlist?.length === 0 ? (
             <h3>You don't have any wish product yet.</h3>
           ) : (
-            Object.values(products)?.map((product) => {
-              if (product._id == wishlist?.find((wish) => product._id == wish))
+            wishlist.map((product) => {
                 return (
                   <Col
                     key={product._id}
