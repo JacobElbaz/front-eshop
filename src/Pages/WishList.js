@@ -1,25 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Row, Col, Button, Modal } from 'react-bootstrap';
-import Product from '../Components/Product';
-import { HeartFill } from 'react-bootstrap-icons';
-import { Link } from 'react-router-dom';
-import { removeWishProduct } from '../actions/user.action';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Row, Col, Button, Modal } from "react-bootstrap";
+import Product from "../Components/Product";
+import { HeartFill } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
+import { getCurrentUser, removeWishProduct } from "../actions/user.action";
 
 const WishList = () => {
   const [showModalCart, setShowModalCart] = useState(false);
-  const [loadProducts, setLoadProducts] = useState();
+  const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.userReducer);
   const wishlist = user?.wishlist;
   const dispatch = useDispatch();
   const qty = 1;
   let [cart, setCart] = useState([]);
-  let localCart = localStorage.getItem('cart');
+  let localCart = localStorage.getItem("cart");
 
   useEffect(() => {
     localCart = JSON.parse(localCart);
     if (localCart) setCart(localCart);
-  }, [loadProducts, dispatch]);
+    const fetchData = async () => {
+      try {
+        await dispatch(getCurrentUser());
+      } catch (error) {
+        // Handle error
+        console.error("Error fetching product:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [dispatch, user]);
 
   const onAddToCartClick = (product) => {
     if (user) {
@@ -34,17 +46,17 @@ const WishList = () => {
       }
       setCart(cartCopy);
       let stringCart = JSON.stringify(cartCopy);
-      localStorage.setItem('cart', stringCart);
+      localStorage.setItem("cart", stringCart);
       onRemoveProduct(product._id);
     } else {
-      window.location = '/login';
+      window.location = "/login";
     }
   };
 
   const onRemoveProduct = (productId) => {
     if (user) {
       dispatch(removeWishProduct(productId, user._id));
-      setLoadProducts(true);
+      setIsLoading(true);
       window.location.reload();
     }
   };
@@ -52,12 +64,12 @@ const WishList = () => {
     return (
       <HeartFill
         style={{
-          position: 'absolute',
-          right: '2rem',
-          top: '2rem',
+          position: "absolute",
+          right: "2rem",
+          top: "2rem",
           zIndex: 100,
-          color: 'red',
-          cursor: 'pointer',
+          color: "red",
+          cursor: "pointer",
         }}
         onClick={() => onRemoveProduct(productId)}
       />
@@ -78,7 +90,7 @@ const WishList = () => {
           <Link
             type="button"
             className="btn btn-secondary"
-            to={'/'}
+            to={"/"}
             onClick={() => handleClose}
           >
             Continue Shopping
@@ -95,12 +107,14 @@ const WishList = () => {
       </Modal>
       <div className="p-5 home">
         <h1>Wishlist</h1>
-
-        <Row>
-          {wishlist?.length === 0 ? (
-            <h3>You don't have any wish product yet.</h3>
-          ) : (
-            wishlist.map((product) => {
+        {isLoading ? (
+          "Loading..."
+        ) : (
+          <Row>
+            {wishlist?.length === 0 ? (
+              <h3>You don't have any wish product yet.</h3>
+            ) : (
+              wishlist?.map((product) => {
                 return (
                   <Col
                     key={product._id}
@@ -108,7 +122,7 @@ const WishList = () => {
                     md={6}
                     lg={4}
                     xl={3}
-                    style={{ position: 'sticky' }}
+                    style={{ position: "sticky" }}
                   >
                     {renderLikeIcon(product._id)}
                     <Product product={product} />
@@ -123,9 +137,10 @@ const WishList = () => {
                     </Row>
                   </Col>
                 );
-            })
-          )}
-        </Row>
+              })
+            )}
+          </Row>
+        )}
       </div>
     </>
   );

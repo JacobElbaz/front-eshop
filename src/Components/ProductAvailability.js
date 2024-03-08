@@ -25,7 +25,7 @@ const ProductAvailability = ({ product }) => {
   useEffect(() => {
     localCart = JSON.parse(localCart);
     if (localCart) setCart(localCart);
-    if (!isEmpty(user) && user.wishlist.find((wish) => wish === product._id)) {
+    if (!isEmpty(user) && user.wishlist.find((wish) => wish._id === product._id)) {
       setInWishlist(true);
     }
   }, []); //the empty array ensures useEffect only runs once
