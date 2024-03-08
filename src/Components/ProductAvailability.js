@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -7,11 +7,11 @@ import {
   Form,
   Button,
   Modal,
-} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { addWishProduct, removeWishProduct } from '../actions/user.action';
-import { Link } from 'react-router-dom';
-import { isEmpty } from './Utils';
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addWishProduct, removeWishProduct } from "../actions/user.action";
+import { Link } from "react-router-dom";
+import { isEmpty } from "./Utils";
 
 const ProductAvailability = ({ product }) => {
   const [showModalCart, setShowModalCart] = useState(false);
@@ -19,12 +19,15 @@ const ProductAvailability = ({ product }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.userReducer);
   let [cart, setCart] = useState([]);
-  let localCart = localStorage.getItem('cart');
-  let d = '';
+  let localCart = localStorage.getItem("cart");
+  const [inWishlist, setInWishlist] = useState(false);
 
   useEffect(() => {
     localCart = JSON.parse(localCart);
     if (localCart) setCart(localCart);
+    if (!isEmpty(user) && user.wishlist.find((wish) => wish === product._id)) {
+      setInWishlist(true);
+    }
   }, []); //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
@@ -40,24 +43,22 @@ const ProductAvailability = ({ product }) => {
       }
       setCart(cartCopy);
       let stringCart = JSON.stringify(cartCopy);
-      localStorage.setItem('cart', stringCart);
+      localStorage.setItem("cart", stringCart);
       setShowModalCart(true);
     } else {
-      window.location = '/login';
+      window.location = "/login";
     }
   };
 
   const onAddToWishListClick = () => {
     if (!isEmpty(user)) {
-      if(d==='Remove From Wishlist'){
+      if (inWishlist) {
         dispatch(removeWishProduct(product._id, user._id));
-      }
-      else{
+      } else {
         dispatch(addWishProduct(product._id, user._id));
       }
-      
     } else {
-      window.location = '/login';
+      window.location = "/login";
     }
   };
 
@@ -76,7 +77,7 @@ const ProductAvailability = ({ product }) => {
           <Link
             type="button"
             className="btn btn-secondary"
-            to={'/'}
+            to={"/"}
             onClick={() => handleClose}
           >
             Continue Shopping
@@ -105,7 +106,7 @@ const ProductAvailability = ({ product }) => {
             <Row>
               <Col>Status:</Col>
               <Col>
-                {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+                {product.countInStock > 0 ? "In Stock" : "Out of Stock"}
               </Col>
             </Row>
           </ListGroup.Item>
@@ -147,9 +148,7 @@ const ProductAvailability = ({ product }) => {
                 type="button"
                 onClick={onAddToWishListClick}
               >
-                {!isEmpty(user) && user.wishlist.find((wish) => wish === product._id)
-                  ? d = 'Remove From Wishlist'
-                  : d = 'Add To Wishlist'}
+                {inWishlist ? "Remove From Wishlist" : "Add To Wishlist"}
               </Button>
             </Row>
           </ListGroup.Item>
